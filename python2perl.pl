@@ -74,6 +74,10 @@ foreach $line (@pythonFile) {
 			$line =~ s/\%/\% /;
 		}
 
+		if ($line =~ /[a-zA-Z0-9]\%/ && $line =~ /[^(print)]/) {
+			$line =~ s/\%/ \%/g;
+		}
+
 		if ($line =~ /\*\*[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\*\*/\*\* /;
 		}
@@ -147,6 +151,10 @@ foreach $line (@pythonFile) {
 
 		if ($line =~ /\ = [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/ \= / \= \$/g;	
+		}
+
+		if ($line =~ /[a-zA-Z0-9]=[a-zA-Z]/ && $line =~ /[^(print)]/) {
+			$line =~ s/\=/ \= \$/g;	
 		}
 			
 		if ($line =~ /\% [a-zA-Z]/ && $line =~ /[^(print)]/) {
@@ -251,7 +259,16 @@ foreach $line (@pythonFile) {
 					
 					#if the expression after the new line is starting with a variable give it a $
 					if ($line =~ /\;\n    [a-zA-Z]/) {
-						$line =~ s/\;\n    /\;\n    \$/;
+
+						if ($line =~ /\n( ){4}\s*last/) {
+							# do nothing
+						} else {
+							if ($line =~ /\n( ){4}next/) {
+								# body...
+							} else {
+								$line =~ s/\;\n    /\;\n    \$/;	
+							}
+						}
 					}
 
 					if ($line =~ /\n( ){4}[a-zA-Z]/) {
@@ -263,11 +280,20 @@ foreach $line (@pythonFile) {
 								$line =~ s/;/\\n\"\;/;
 							}
 						} else {
-							$line =~ s/\n( ){4}/\n    \$/;						
+							if ($line =~ /\n( ){4}\s*last/) {
+								# do nothing
+							} else {
+								if ($line =~ /\n( ){4}next/) {
+									# body...
+								} else {
+									$line =~ s/\n( ){4}/\n    \$/;		
+								}
+							}					
 						}
 
 						if ($line =~ /[a-zA-Z0-9]$/) {
-							$line =~ s/\n$/\;\n\}\n/;
+							$line =~ s/\n$//;
+							$line =~ s/$/\;\n\}\n/;
 						}
 					}
 
@@ -279,14 +305,23 @@ foreach $line (@pythonFile) {
 
 					#if the line contains an expression after the 4 spaces since it is an inline if statement
 					if ($line =~ /\n( ){4}[a-zA-Z]/) {
-						$line =~ s/\n( ){4}/\n    \$/;
 
+						if ($line =~ /\n( ){4}\s*last/) {
+							# do nothing
+						} else {
+							if ($line =~ /\n( ){4}next/) {
+								# body...
+							} else {
+								$line =~ s/\n( ){4}/\n    \$/;		
+							}
+						}
 						
 
 						# if the line ends in numbers then add a $ sign to the variable name & the semi colon
 						# otherwise just add the semi colon
 						if ($line =~ /[a-zA-Z0-9]$/) {
-							$line =~ s/\n$/\;\n\}\n/;
+							$line =~ s/\n$//;
+							$line =~ s/$/\;\n\}\n/;
 						}
 					}
 				}
@@ -404,11 +439,17 @@ foreach $line (@pythonFile) {
 					# otherwise just add the semi colon
 					if ($line =~ /[0-9]$/) {
 						$line =~ s/^/\$/;
-						$line =~ s/\n/\;\n/;
+						$line =~ s/\n$//;
+						$line =~ s/$/\;\n/;
 					} else {
 						$line =~ s/^/\$/;
-						$line =~ s/\=/\=\"/;
-						$line =~ s/\n/\"\;\n/;
+						if ($line =~ /\=\"/ || $line =~ /\= \"/) {
+							$line =~ s/\"\n/\"\;\n/;
+						} else {
+							$line =~ s/\=/\=\"/;
+							$line =~ s/\n/\"\;\n/;
+						}
+
 					}
 				}
 			}
