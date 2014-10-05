@@ -24,28 +24,44 @@ foreach $line (@pythonFile) {
 		}
 
 		#if the line contains subtraction add a space
-		if ($line =~ /\-[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\-[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\-/\- /g;
 		}
 
+		if ($line =~ /[a-zA-Z0-9]\-/ && $line =~ /[^(print)]/) {
+			$line =~ s/\-/ \-/g;
+		}
+
 		#if the line contains addition add a space
-		if ($line =~ /\+[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\+[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\+/\+ /g;
+		}
+
+		if ($line =~ /[a-zA-Z0-9]\+/ && $line =~ /[^(print)]/) {
+			$line =~ s/\+/ \+/g;
+		}
+
+		if ($line =~ /[a-zA-Z0-9]\// && $line =~ /[^(print)]/) {
+			$line =~ s/\// \//g;
+		}
+
+		if ($line =~ /[a-zA-Z0-9]\*/ && $line =~ /[^(print)]/) {
+			$line =~ s/\*/ \*/g;
 		}
 						
 		#if the line contains multiplication add a space
-		if ($line =~ /\*[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\*[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\*/\* /g;
 		}
 						
 		#if the line contains division add a space
-		if ($line =~ /\/[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\/[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\//\/ /g;
 		}
 
 		#single equals
 		if ($line =~ /\ =[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
-			$line =~ s/\= /\= /g;	
+			$line =~ s/\=/\= /g;	
 		}
 
 		#comparison (double equals)
