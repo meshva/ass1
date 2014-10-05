@@ -328,10 +328,12 @@ foreach $line (@pythonFile) {
 					if ($line =~ /\n( ){4}[a-zA-Z]/) {
 						$line =~ s/\n( ){4}/\n    \$/;
 
-						# if the line ends in numbers then add a $ sign to the variable name & the semi colon
-						# otherwise just add the semi colon
-						if ($line =~ /[a-zA-Z0-9]$/) {
-							$line =~ s/\n$/\;\n\}\n/;
+						# add a semi colon unless it ends in a bracket already
+						if ($line =~ /[^\{\}]$/) {
+							if ($line =~ /\n$/) {
+								$line =~ s/\n$//;
+							}
+							$line =~ s/$/\;\n\}\n/;
 						}
 					}
 
