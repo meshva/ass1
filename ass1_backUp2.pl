@@ -192,6 +192,8 @@ foreach $line (@pythonFile) {
 		#if the line is a while loop
 		if ($line =~ /^while/) {
 
+			
+
 			#replace the word break with last - assuming that there are no variables or strings
 			# with the word break or continue also assuming that break and continue are used in loops
 			if ($line =~ /break/) {
@@ -266,30 +268,9 @@ foreach $line (@pythonFile) {
 				#multilevel while loops
 			}
 		} else {
-
-			#if the line is a for loop
-			if ($line =~ /^for/) {
-				$line =~ s/^for /foreach \$/;
-				$line =~ s/in//;
-
-				if ($line =~ /range\(/) {
-					#capturing the second number in the range
-					$numTwo = $line;
-					$numTwo =~ s/(.)*range\(//;
-					$numTwo =~ s/(.)*,//;
-					$numTwo =~ s/^ //;
-					$numTwo =~ s/\)(.)*//;
-					$numTwo = $numTwo-1;
-
-					$line =~ s/ range\(/\(/;
-					$line =~ s/, [a-zA-Z0-9]*/..$numTwo/;
-				}
-
-				$line =~ s/:/ \{/;
-			}
-
 			#if the line is an if statement
-			if ($line =~ /^if/) {					
+			if ($line =~ /^if/) {		
+				
 				#if the line is an inline if statement
 				if ($line =~ /: [a-zA-Z0-9]/) {
 					#add a variable $ and a new line followed by the appropriate indentation
@@ -337,30 +318,6 @@ foreach $line (@pythonFile) {
 							$line =~ s/(\s)$//;
 							chomp $line;
 
-							$endLine = "\\n\"\;\n";
-							$line = $line.$endLine;
-						}
-					}
-				}
-
-				if ($line =~ /\s*print/) {
-					#if the line is a string with quotations
-					if ($line =~ /\s*print \"/) {
-						$line =~ s/\"\n/\"/;
-						$line =~ s/(\")$/\", \"\\n\"\;\n/;
-					} else {
-
-						if ($line =~ /[\+\-\/\*]/) {
-							#get rid of any new line characters or trailing white space
-							$line =~ s/(\s)$//;
-							chomp $line;
-
-							$line =~ s/^print /print \$/;
-
-							$line = $line."\, \"\\n\"\;\n";
-						} else {
-							$line =~ s/print /print \"\$/;
-							$line =~ s/\n$//;
 							$endLine = "\\n\"\;\n";
 							$line = $line.$endLine;
 						}
