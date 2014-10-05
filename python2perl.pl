@@ -385,8 +385,8 @@ foreach $line (@pythonFile) {
 					if ($line =~ /^print \"/) {
 						$line =~ s/\"\n/\"/;
 						$line =~ s/(\")$/\", \"\\n\"\;\n/;
+						
 					} else {
-
 						if ($line =~ /[\+\-\/\*]/) {
 							#get rid of any new line characters or trailing white space
 							$line =~ s/(\s)$//;
@@ -410,7 +410,7 @@ foreach $line (@pythonFile) {
 
 				if ($line =~ /\s*print/) {
 					#if the line is a string with quotations
-					if ($line =~ /\s*print \"/) {
+					if ($line =~ /\    print \"/) {
 						$line =~ s/\"\n/\"/;
 						$line =~ s/(\")$/\", \"\\n\"\;\n/;
 					} else {
@@ -449,6 +449,7 @@ foreach $line (@pythonFile) {
 							$line =~ s/\=/\=\"/;
 							$line =~ s/\n/\"\;\n/;
 						}
+						print "here\n";
 
 					}
 				}
