@@ -54,60 +54,60 @@ foreach $line (@pythonFile) {
 		}
 
 		#if the line has a modulus add a space
-		if ($line =~ /\%[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\%[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\%/\% /;
 		}
 
-		if ($line =~ /\*\*[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\*\*[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\*\*/\*\* /;
 		}
 
 		#bitwise operations
-		if ($line =~ /\<[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\</\< /;
 		}
 
-		if ($line =~ /\>[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\>[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\>/\> /;
 		}
 
-		if ($line =~ /\<\=[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<\=[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\<\=/\<\= /;
 		}
 
-		if ($line =~ /\>\=[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\>\=[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\>\=/\>\= /;
 		}
 
-		if ($line =~ /\<\>[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<\>[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\<\>/\<\> /;
 		}
 
-		if ($line =~ /\!\=[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\!\=[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\!\=/\!\= /;
 		}
 
-		if ($line =~ /\>\>[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\>\>[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\>\>/\>\> /;
 		}
 
-		if ($line =~ /\<\<[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<\<[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\<\</\<\< /;
 		}
 
-		if ($line =~ /\|[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\|[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\|/\| /;
 		}
 
-		if ($line =~ /\~[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\~[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\~/\~ /;
 		}
 
-		if ($line =~ /\&[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\&[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\&/\& /;
 		}
 
-		if ($line =~ /\^[a-bA-B0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\^[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\^/\^ /;
 		}
 
@@ -133,60 +133,72 @@ foreach $line (@pythonFile) {
 			$line =~ s/ \= / \= \$/g;	
 		}
 			
-		if ($line =~ /\% [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\% [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\% /\% \$/;
 		}
 
-		if ($line =~ /\*\* [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\*\* [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\*\* /\*\* \$/;
 		}
 
-		if ($line =~ /\< [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\< [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\< /\< \$/;
 		}
 
-		if ($line =~ /\> [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\> [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\> /\> \$/;
 		}
 
-		if ($line =~ /\<\= [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<\= [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\<\= /\<\= \$/;
 		}
 
-		if ($line =~ /\>\= [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\>\= [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\>\= /\>\= \$/;
 		}
 
-		if ($line =~ /\<\> [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<\> [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\<\> /\<\> \$/;
 		}
 
-		if ($line =~ /\!\= [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\!\= [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\!\= /\!\= \$/;
 		}
 
-		if ($line =~ /\>\> [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\>\> [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\>\> /\>\> \$/;
 		}
 
-		if ($line =~ /\<\< [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\<\< [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\<\< /\<\< \$/;
 		}
 
-		if ($line =~ /\| [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\| [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\| /\| \$/;
 		}
 
-		if ($line =~ /\~ [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\~ [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\~ /\~ \$/;
 		}
 
-		if ($line =~ /\& [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\& [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\& /\& \$/;
 		}
 
-		if ($line =~ /\^ [a-bA-B]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /\^ [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\^ /\^ \$/;
+		}
+
+		if ($line =~ /and [a-zA-Z]/ && $line =~ /[^(print)]/) {
+			$line =~ s/and /and \$/;
+		}
+
+		if ($line =~ /or [a-zA-Z]/ && $line =~ /[^(print)]/) {
+			$line =~ s/or /or \$/;
+		}
+
+		if ($line =~ /not [a-zA-Z]/ && $line =~ /[^(print)]/) {
+			$line =~ s/not /not \$/;
 		}
 
 		#if the line is a while loop
