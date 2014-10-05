@@ -1,11 +1,13 @@
-COMP2041 Assignment Diary
+Meshva Divyeshkumar Mehta - z3463610 - Semester 2 - Tutor: Hayden Smith
+
+COMP2041 Assignment One Diary
 
 Date	Start	Stop	Activity		Comments
 13/9	11:00	11:30	Setup			Setup the files and the tests for subsets, added my first commit
 15/9	13:30	14:00	Imp. Setup		Planned out how to handle each subset, i.e. what should be done first, etc.
 18/9	11:00	13:00	Coding			Coded subset0 as well as parts of subset one
 23/9	13:00	15:00	Debugging		Found a bug with one of the prints and had to add a case for unquoted prints
-25/9	11:00	13:00	Coding			Implemented the remainder of subset1
+25/9	11:00	13:00	Coding			Implemented the remainder of subset1 including simple operations
 29/9	14:00	17:00	Debugging		Finished subset1 completely and started subset2 but found bug with variables
 1/10	13:00	15:00	Coding			Finished operations as well as bitwise operations in subset2
 1/10	17:00	18:00	Debugging		Fixed some cases that broke subset1 becuase of subset2
@@ -13,3 +15,7 @@ Date	Start	Stop	Activity		Comments
 3/10	14:00	17:00	Coding			Finished hanling inline while loops (no semi colon)
 4/10	09:00	11:00	Code + Debugg   Finished handling inline while loops with the semi colon
 4/10	13:00	15:00	Coding			Finished handling prints with inline while loops
+5/10	09:00	11:00	Coding			Finished handling all of subset2 which works with previous subsets
+5/10	23:00	00:00	Diray			Started to type out the handwritten diary
+6/10	09:00	10:00	Demo			Started to write out the tests
+6/10	13:00	14:00	Diary 			Finished typing the diary out
