@@ -23,6 +23,15 @@ foreach $line (@pythonFile) {
 			chomp $line;
 		}
 
+		#case for printing strings
+		if ($line =~ /^print \"/) {
+			$line =~ s/\n$//;
+			$endLine = "\, \"\\n\"\;\n";
+			$line = $line.$endLine;
+			print $line;
+			next;
+		}
+
 		#if the line contains subtraction add a space
 		if ($line =~ /\-[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\-/\- /g;
@@ -217,7 +226,7 @@ foreach $line (@pythonFile) {
 			$line =~ s/and /and \$/;
 		}
 
-		if ($line =~ /or [a-zA-Z]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /or [a-zA-Z]/ and $line =~ /[^(print)]/) {
 			$line =~ s/or /or \$/;
 		}
 
@@ -356,7 +365,10 @@ foreach $line (@pythonFile) {
 				#if the line is an inline if statement
 				if ($line =~ /: [a-zA-Z0-9]/) {
 					#add a variable $ and a new line followed by the appropriate indentation
-					$line =~ s/^if /if \(\$/;
+					$line =~ s/^if /if \(/;
+					if ($line =~ /^if \([a-zA-Z]/) {
+						$line =~ s/^if \(/if \(\$/;
+					}
 					$line =~ s/:(\s)*/\) \{\n    /;
 
 					#if the line contains an expression after the 4 spaces since it is an inline if statement
@@ -408,9 +420,9 @@ foreach $line (@pythonFile) {
 					}
 				}
 
-				if ($line =~ /\s*print/) {
+				if ($line =~ /( ){4}print/) {
 					#if the line is a string with quotations
-					if ($line =~ /\    print \"/) {
+					if ($line =~ /( ){4}print \"/) {
 						$line =~ s/\"\n/\"/;
 						$line =~ s/(\")$/\", \"\\n\"\;\n/;
 					} else {
@@ -424,10 +436,16 @@ foreach $line (@pythonFile) {
 
 							$line = $line."\, \"\\n\"\;\n";
 						} else {
-							$line =~ s/print /print \"\$/;
-							$line =~ s/\n$//;
-							$endLine = "\\n\"\;\n";
-							$line = $line.$endLine;
+							if ($line =~ /[a-zA-Z0-9] [a-zA-Z0-9]/) {
+								$line =~ s/\n$//;
+								$endLine = "\\n\;\n";
+								$line = $line.$endLine;
+							} else {
+								$line =~ s/print /print \"\$/;
+								$line =~ s/\n$//;
+								$endLine = "\\n\"\;\n";
+								$line = $line.$endLine;
+							}
 						}
 					}
 				}
@@ -449,8 +467,7 @@ foreach $line (@pythonFile) {
 							$line =~ s/\=/\=\"/;
 							$line =~ s/\n/\"\;\n/;
 						}
-						print "here\n";
-
+						
 					}
 				}
 			}
