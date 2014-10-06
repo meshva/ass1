@@ -69,7 +69,7 @@ foreach $line (@pythonFile) {
 		}
 
 		#single equals
-		if ($line =~ /\ =[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
+		if ($line =~ /( )=[a-zA-Z0-9]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\=/\= /g;	
 		}
 
@@ -194,6 +194,10 @@ foreach $line (@pythonFile) {
 			$line =~ s/\<\> /\<\> \$/;
 		}
 
+		if ($line =~ /[a-zA-Z0-9]\!\=/ && $line =~ /[^(print)]/) {
+			$line =~ s/\!\=/ \!\=/;
+		}
+
 		if ($line =~ /\!\= [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/\!\= /\!\= \$/;
 		}
@@ -226,7 +230,7 @@ foreach $line (@pythonFile) {
 			$line =~ s/and /and \$/;
 		}
 
-		if ($line =~ /or [a-zA-Z]/ and $line =~ /[^(print)]/) {
+		if ($line =~ /or [a-zA-Z]/ && $line =~ /[^(print)]/) {
 			$line =~ s/or /or \$/;
 		}
 
@@ -264,7 +268,7 @@ foreach $line (@pythonFile) {
 					
 
 					#give the operation after the ; a new line and indentation
-					$line =~ s/\; /\;\n    /;
+					$line =~ s/\;/\;\n    /;
 					
 					#if the expression after the new line is starting with a variable give it a $
 					if ($line =~ /\;\n    [a-zA-Z]/) {
@@ -460,14 +464,24 @@ foreach $line (@pythonFile) {
 						$line =~ s/\n$//;
 						$line =~ s/$/\;\n/;
 					} else {
-						$line =~ s/^/\$/;
-						if ($line =~ /\=\"/ || $line =~ /\= \"/) {
-							$line =~ s/\"\n/\"\;\n/;
+
+						if ($line =~ /[\+\-\/\*]/) {
+							$line =~ s/^/\$/;
+							#get rid of any new line characters or trailing white space
+							$line =~ s/(\s)$//;
+							chomp $line;
+
+							$line = $line."\;\n";
 						} else {
-							$line =~ s/\=/\=\"/;
-							$line =~ s/\n/\"\;\n/;
+
+							$line =~ s/^/\$/;
+							if ($line =~ /\=\"/ || $line =~ /\= \"/) {
+								$line =~ s/\"\n/\"\;\n/;
+							} else {
+								$line =~ s/\=/\=\"/;
+								$line =~ s/\n/\"\;\n/;
+							}
 						}
-						
 					}
 				}
 			}
