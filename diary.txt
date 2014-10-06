@@ -20,3 +20,4 @@ Date	Start	Stop	Activity		Comments
 5/10	23:00	00:00	Diray			Started to type out the handwritten diary
 6/10	09:00	10:00	Demo			Started to write out the tests
 6/10	13:00	14:00	Diary 			Finished typing the diary out
+6/10 	14:30	16:00	Tests + Debug	Finished the tests for the code and handled some major bugs
