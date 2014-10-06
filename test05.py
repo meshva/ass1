@@ -8,4 +8,4 @@ zero=number0%number1
 
 if zero != number1: zero = zero+1
 
-print "test for simple arithmetic and if statement"
+print "test for variable allocations in an if statement"

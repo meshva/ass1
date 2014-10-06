@@ -268,6 +268,9 @@ foreach $line (@pythonFile) {
 					
 
 					#give the operation after the ; a new line and indentation
+					if ($line =~ /\; /) {
+						$line =~ s/\; /\;/;
+					}
 					$line =~ s/\;/\;\n    /;
 					
 					#if the expression after the new line is starting with a variable give it a $

@@ -9,3 +9,4 @@ zero=number0%number1
 print zero
 
 
+print "This a test for more complex arithmetic i.e. modulus"
